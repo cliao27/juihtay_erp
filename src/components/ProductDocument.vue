@@ -64,16 +64,16 @@
       <b-col cols="12" lg="3">
         <b-row>
           <b-col cols="12">
-          <b-card border-variant="secondary" header="Quotation">
-            <b-row>
-              <b-col>Pricing</b-col>
-              <b-col>{{ appDocument.unit_price }}</b-col>
-            </b-row>
-            <b-row>
-              <b-col>Qouation</b-col>
-              <b-col>xxxx</b-col>
-            </b-row>
-          </b-card>
+            <b-card border-variant="secondary" header="Quotation">
+              <b-row>
+                <b-col>Pricing</b-col>
+                <b-col>{{ appDocument.unit_price }}</b-col>
+              </b-row>
+              <b-row>
+                <b-col>Qouation</b-col>
+                <b-col>xxxx</b-col>
+              </b-row>
+            </b-card>
           </b-col>
         </b-row>
         <br />
@@ -99,7 +99,8 @@
           <storage-record></storage-record>
         </b-tab>
         <b-tab title="Shipping">
-          <shipping-record></shipping-record>
+          <shipping-record :records="appDocument.shipping_record"></shipping-record>
+          <!-- <shipping-record></shipping-record> -->
         </b-tab>
         <b-tab title="Inventory">
           <storage-record></storage-record>

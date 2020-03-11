@@ -1,58 +1,77 @@
 <template>
   <div>
-    <div>
-      Sorting By:
-      <b>{{ sortBy }}</b>, Sort Direction:
-      <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
-    </div>
-    <b-col lg="4" class="my-1">
-      <b-form-group
-        label="Filter"
-        label-cols-sm="3"
-        label-align-sm="right"
-        label-size="sm"
-        label-for="filterInput"
-        class="mb-0"
-      >
-        <b-input-group size="sm">
-          <b-form-input
-            v-model="filter"
-            type="search"
-            id="filterInput"
-            placeholder="Type to Search"
-          ></b-form-input>
-          <b-input-group-append>
-            <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-          </b-input-group-append>
-        </b-input-group>
-      </b-form-group>
-    </b-col>
-    <b-col sm="2" md="3" class="my-1">
-      <b-form-group
-        label="Per page"
-        label-cols-sm="4"
-        label-cols-md="3"
-        label-cols-lg="2"
-        label-align-sm="right"
-        label-size="sm"
-        label-for="perPageSelect"
-        class="mb-0"
-      >
-        <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
-      </b-form-group>
-    </b-col>
+   <b-row>
+      <b-col cols="12" lg="4">
+        <b-form-group
+          label="Filter"
+          label-cols="2"
+          label-align="right"
+          label-size="lg"
+          label-for="filterInput"
+          class="mb-0"
+        >
+          <b-input-group size="lg">
+            <b-form-input
+              v-model="filter"
+              type="search"
+              id="filterInput"
+              placeholder="Type to Search"
+            ></b-form-input>
+            <b-input-group-append>
+              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
 
-    <b-col sm="4" md="4" class="my-1">
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="list.length"
-        :per-page="perPage"
-        align="fill"
-        size="sm"
-        class="my-0"
-      ></b-pagination>
-    </b-col>
-
+      <b-col cols="12" lg="5">
+        <div>
+          Sorting By:
+          <b>{{ sortBy }}</b>, Sort Direction:
+          <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+        </div>
+      </b-col>
+      <b-col cols="12" lg="3">
+        <b-form-group
+          label-cols-sm="3"
+          label-cols-md="3"
+          label-cols-lg="2"
+          label-align-sm="right"
+          label-size="md"
+          label-for="perPageSelect"
+          class="mb-0"
+        >
+          <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+        </b-form-group>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="12">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="list.length"
+          :per-page="perPage"
+          pills
+          limit="10"
+          align="fill"
+          size="sm"
+          class="my-0"
+        >
+          <template v-slot:first-text>
+            <b-icon icon="skip-end-fill"></b-icon>
+          </template>
+          <template v-slot:prev-text>
+            <b-icon icon="skip-start-fill"></b-icon>
+          </template>
+          <template v-slot:next-text>
+            <b-icon icon="skip-backward-fill"></b-icon>
+          </template>
+          <template v-slot:last-text>
+            <b-icon icon="skip-forward-fill"></b-icon>
+          </template>
+        </b-pagination>
+      </b-col>
+    </b-row>
     <b-table
       striped
       hover
@@ -96,18 +115,20 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { store } from "@/store/store";
+
 const namespaced = "order";
 
 export default {
   data() {
     return {
+      search:[],
       pageList:[],
       filter: null,
-      filterOn: ["order_number", "customer"],
+      filterOn: ["order_number", "customer", "order_datetime", "jon"],
       totalRows: 1,
       currentPage: 1,
-      perPage: 100,
-      pageOptions: [100, 500, 2000],
+      perPage: 500,
+      pageOptions: [500, 1000, 2000],
       sortBy: "order_datetime",
       sortDesc: true,
 
@@ -130,14 +151,14 @@ export default {
     };
   },
   mounted() {
-    console.log(this.databasePath);
+    console.log(this.$route.fullPath);
     if (this.databasePath === "/order") {
       console.log("List All");
-      store.dispatch(namespaced + "/FETCH_LIST", this.databasePath);
+      store.dispatch(namespaced + "/FETCH_LIST", this.$route.path);
     }
     if (this.databasePath.includes("/order/customer/")) {
-      console.log("List " + this.databasePath);
-      store.dispatch(namespaced + "/FETCH_FILTERED_LIST", this.databasePath);
+      console.log("List " + this.$route.path);
+      store.dispatch(namespaced + "/FETCH_FILTERED_LIST", this.$route.path);
       // this.pageList = store.filtered_list;
     }
     // if (this.databasePath.includes("/customer")) {
@@ -164,7 +185,4 @@ export default {
 	***
 	!-->
 <style scoped>
-table {
-  flex-grow: 1;
-}
 </style>

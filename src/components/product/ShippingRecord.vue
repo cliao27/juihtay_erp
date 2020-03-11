@@ -6,7 +6,7 @@
         hover
         small
         :fields="fields"
-        :items="appDocument.shipping_record"
+        :items="records"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
       >
@@ -26,11 +26,14 @@
 	***
 -->
 <script>
-import { mapGetters } from "vuex";
-import { store } from "@/store/store";
-const namespaced = "product";
+// import { mapGetters } from "vuex";
+// import { store } from "@/store/store";
+// const namespaced = "product";
 
 export default {
+  props:{
+    records: Array, 
+  },
   data() {
     return {
       sortBy: "packaging_datetime",
@@ -50,12 +53,12 @@ export default {
       ]
     };
   },
-  mounted() {
-    store.appDocument;
-  },
-  computed: {
-    ...mapGetters(namespaced, ["appDocument"])
-  }
+  // mounted() {
+  //   store.appDocument;
+  // },
+  // computed: {
+  //   ...mapGetters(namespaced, ["appDocument"])
+  // }
 };
 </script>
 

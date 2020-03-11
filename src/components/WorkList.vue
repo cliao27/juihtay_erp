@@ -2,11 +2,15 @@
   <div>
     <b-row>
       <b-col cols="12" lg="4">
-        <b-form-group>
-          <b-input-group>
-            <b-input-group-prepend is-text>
-              <b-icon icon="search"></b-icon>
-            </b-input-group-prepend>
+        <b-form-group
+          label="Filter"
+          label-cols="2"
+          label-align="right"
+          label-size="lg"
+          label-for="filterInput"
+          class="mb-0"
+        >
+          <b-input-group size="lg">
             <b-form-input
               v-model="filter"
               type="search"
@@ -19,10 +23,13 @@
           </b-input-group>
         </b-form-group>
       </b-col>
+
       <b-col cols="12" lg="5">
-        Sorting By:
-        <b>{{ sortBy }}</b>, Sort Direction:
-        <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+        <div>
+          Sorting By:
+          <b>{{ sortBy }}</b>, Sort Direction:
+          <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+        </div>
       </b-col>
       <b-col cols="12" lg="3">
         <b-form-group
@@ -84,7 +91,7 @@
     >
       <template v-slot:cell(jwn)="data">
         <!-- `data.value` is the value after formatted by the Formatter -->
-        <a :href="`${databasePath}/${data.value}`">{{ data.value }}</a>
+        <a :href="`${databasePath}/${data.value}?${data.item.ptn}`">{{ data.value }}</a>
       </template>
       <template v-slot:cell(ptn)="data">
         <!-- `data.value` is the value after formatted by the Formatter -->

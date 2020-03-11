@@ -22,7 +22,7 @@ Vue.use(VueAxios, axios)
 
 // const apiURL = "http://192.168.103.160:5000/";
 // const apiURL = "http://localhost:5000/";
-const apiURL = "http://192.168.5.130:5000/";
+const apiURL = "http://192.168.5.131:5000/";
 
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? apiURL : apiURL;
