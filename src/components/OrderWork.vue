@@ -1,15 +1,15 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-table 
-      striped 
-      hover 
-      borderless 
-      small
-       dark
-       v-bind:fields="fields"
-        v-bind:items="appDocument.order_item"
-        >
+      <b-table
+        striped
+        hover
+        small
+        :fields="fields"
+        :items="appDocument.order_item"
+        :filter="filter"
+        :filterIncludedFields="filterOn"
+      >
         <!-- A virtual column -->
         <template v-slot:cell(index)="dataList">{{ dataList.index+1 }}</template>
       </b-table>
@@ -31,9 +31,14 @@ import { store } from "@/store/store";
 const namespaced = "order";
 
 export default {
+  props:{
+    display: String,
+  },
   data() {
     return {
       search: "",
+      filter: this.display,
+      filterOn: ["work_progress"],
       fields: [
         { key: "index", label: "x" },
         "jwn",

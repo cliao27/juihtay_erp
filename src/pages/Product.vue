@@ -55,9 +55,7 @@ export default {
 	!-->
 <style scoped>
 h1 {
-  display: flex;
-  background: black;
-  color: white;
   font-weight: bold;
+  padding: 0 15px;
 }
 </style>

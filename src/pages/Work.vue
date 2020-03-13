@@ -1,9 +1,19 @@
 <template>
-  <b-container fluid>
-    <h1>Work {{pageView}} {{ $route.fullPath }}</h1>
-    <app-list-view v-if="pageView === 'list'"></app-list-view>
-    <app-document-view v-else-if="pageView === 'document'"></app-document-view>
+<div>
+    <b-container fluid>
+    <b-row class="no-gutters">
+      <b-col  class="d-print-none">
+        <h1>Work {{pageView}} {{ $route.fullPath }}</h1>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <app-list-view v-if="pageView === 'list'"></app-list-view>
+        <app-document-view v-else-if="pageView === 'document'"></app-document-view>
+      </b-col>
+    </b-row>
   </b-container>
+</div>
 </template>
 
 
@@ -55,9 +65,9 @@ export default {
 	!-->
 <style scoped>
 h1 {
-  display: flex;
-  background: black;
-  color: white;
+  /* background: black;
+  color: white; */
   font-weight: bold;
+  padding: 0 15px;
 }
 </style>

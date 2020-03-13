@@ -50,15 +50,17 @@ const getters = {
 const mutations = {
     SET_LIST(state, data) {
         state.list.splice(0, state.list.length);
-        for(let item of data){
-           state.list.push(item)
-        }
+        state.list = data;
+        // for(let item of data){
+        //    state.list.push(item)
+        // }
      },
     SET_FILTERED_LIST(state, data) {
         state.list.splice(0, state.list.length);
-        for(let item of data){
-           state.list.push(item)
-        }
+        state.list = data;
+        // for(let item of data){
+        //    state.list.push(item)
+        // }
     },
     SET_DOCUMENT(state, data) {
         // console.log(data);

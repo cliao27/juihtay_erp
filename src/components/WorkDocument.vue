@@ -1,16 +1,15 @@
 <template>
-  <div>
+  <b-container fluid>
     <b-row>
-      <b-col cols="12" lg="9">
+      <b-col lg="9">
         <b-card no-body>
           <b-tabs v-model="tabIndex" small card fill>
-            <b-tab title="JSON">
-              <vue-json-pretty :data="appDocument"></vue-json-pretty>
-            </b-tab>
+            <b-tab title="Order"></b-tab>
             <b-tab title="Print Out">
               <!-- <work-print-out :appDocument="appDocument"></work-print-out> -->
-              <work-print-out :ptn="appDocument.ptn"></work-print-out>
+              <work-print-out></work-print-out>
             </b-tab>
+            <b-tab title="Related Work"></b-tab>
             <b-tab title="Scanned PDF"></b-tab>
             <b-tab title="Shipping">
               <shipping-record :records="appDocument.shipping_record"></shipping-record>
@@ -18,10 +17,13 @@
             <b-tab title="Logs">
               <work-log :records="appDocument.work_log"></work-log>
             </b-tab>
+            <b-tab title="JSON">
+              <vue-json-pretty :data="appDocument"></vue-json-pretty>
+            </b-tab>
           </b-tabs>
         </b-card>
       </b-col>
-      <b-col cols="4" lg="3" class="d-print-none">
+      <b-col lg="3" class="d-print-none">
         <b-list-group>
           <div v-for="log in appDocument.work_log" :key="log.seq">
             <b-list-group-item href="#" class="flex-column align-items-start">
@@ -35,7 +37,7 @@
         </b-list-group>
       </b-col>
     </b-row>
-  </div>
+  </b-container>
 </template>
 
 
@@ -61,7 +63,7 @@ export default {
     VueJsonPretty,
     "shipping-record": ShippingRecord,
     "work-log": WorkLog,
-    "work-print-out": WorkPrintOut,
+    "work-print-out": WorkPrintOut
   },
   data() {
     return {

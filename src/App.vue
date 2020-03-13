@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#">SPA</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -59,7 +59,9 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view></router-view>
+    <div class="jumbotron jumbotron-fluid">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -79,7 +81,16 @@ export default {
 
 <style>
 body {
-  margin: 0;
   font-family: "Calibri Nunito SemiBold";
+}
+.jumbotron {
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+  margin:0;
+}
+
+.no-gutters {
+  margin: 0;
+  padding: 0;
 }
 </style>
