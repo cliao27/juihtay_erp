@@ -1,6 +1,6 @@
 <template>
   <div>
-   <b-row>
+    <b-row>
       <b-col cols="12" lg="4">
         <b-form-group
           label="Filter"
@@ -121,8 +121,8 @@ const namespaced = "order";
 export default {
   data() {
     return {
-      search:[],
-      pageList:[],
+      search: [],
+      pageList: [],
       filter: null,
       filterOn: ["order_number", "customer", "order_datetime", "jon"],
       totalRows: 1,

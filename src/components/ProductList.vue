@@ -78,10 +78,10 @@
       small
       footClone
       show-empty
-      v-bind:fields="fields"
-      v-bind:items="list"
-      v-bind:sort-by.sync="sortBy"
-      v-bind:sort-desc.sync="sortDesc"
+      :fields="fields"
+      :items="list"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
       :current-page="currentPage"
       :per-page="perPage"
       :filter="filter"

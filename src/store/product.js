@@ -29,8 +29,8 @@ const namespaced = true;
 
 const state = {
     list: [],
-    filtered_list:[],
-    appDocument:[]
+    filtered_list: [],
+    appDocument: []
 };
 
 const getters = {
@@ -54,7 +54,7 @@ const mutations = {
         // for(let item of data){
         //    state.list.push(item)
         // }
-     },
+    },
     SET_FILTERED_LIST(state, data) {
         state.list.splice(0, state.list.length);
         state.list = data;
@@ -69,7 +69,7 @@ const mutations = {
         // for(let item of data){
         //    state.appDocument.push(item)
         // }
-     },
+    },
 
 };
 
@@ -81,6 +81,13 @@ const actions = {
             })
     },
     FETCH_FILTERED_LIST({ commit }, db) {
+        console.log(db);
+        moduleApi.list(db, "")
+            .then(response => {
+                commit('SET_FILTERED_LIST', response.data);
+            })
+    },
+    FETCH_FILTERED_LIST_SIMPLE({ commit }, db) {
         console.log(db);
         moduleApi.list(db, "")
             .then(response => {

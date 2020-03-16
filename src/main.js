@@ -3,9 +3,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
-
 // import VueResource from 'vue-resource'
-
 // axios.defaults.withCredentials = true
 import App from './App.vue'
 import Routes from './routes/routes'
@@ -20,9 +18,9 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueAxios, axios)
 
-// const apiURL = "http://192.168.103.160:5000/";
-// const apiURL = "http://localhost:5000/";
-const apiURL = "http://192.168.5.131:5000/";
+const apiURL = "http://192.168.103.160:5000/";
+// const apiURL = "http://192.168.1.60:5000/";
+// const apiURL = "http://192.168.5.132:5000/";
 
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? apiURL : apiURL;
