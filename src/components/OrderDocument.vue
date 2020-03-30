@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col lg="5" sm="12">
+      <b-col lg="7" sm="12">
         <b-form-group
           id="customer"
           label-cols-sm="4"
@@ -29,48 +29,43 @@
           label="product_codes"
           label-for="input-horizontal"
         >
-          <b-form-tags input-id="tags-basic" v-model="appDocument.product_codes" class="mb-2"></b-form-tags>
-          <p>Value: {{ appDocument.product_codes }}</p>
+          <b-button v-for="code in appDocument.product_codes" :key="code" variant="success">{{code}}</b-button>
+
+          <!-- tag add implemetations moved under customer settings -->
+          <!-- <b-form-tags         
+            input-id="tags-basic"
+            disabled
+            v-model="appDocument.product_codes"
+            class="mb-2"
+          ></b-form-tags>-->
         </b-form-group>
       </b-col>
 
-      <b-col lg="4" sm="6">
+      <b-col lg="5" sm="6">
         <b-form-group id="order_note" label="order_note" label-for="input-horizontal">
           <b-form-textarea input-id="tags-basic" v-model="appDocument.order_note" rows="4"></b-form-textarea>
         </b-form-group>
       </b-col>
 
-      <b-col lg="3" sm="6">
-        <b-row>
-          <b-list-group>
-            <div v-for="log in appDocument.order_log" :key="log.seq">
-              <b-list-group-item href="#" class="flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                  <small>{{log}}</small>
-                </div>
-              </b-list-group-item>
-            </div>
-          </b-list-group>
-        </b-row>
+      <b-col sm="12" lg="12">
+        <order-entry-detail></order-entry-detail>
       </b-col>
+
       <b-col sm="12" lg="12">
         <b-card no-body>
           <b-tabs v-model="tabIndex" small card fill>
             <b-tab title="NEW">
               <b-card no-body>
-                <b-tabs pills card vertical>
-                  <b-tab :title="`New`">
-                    <order-entry-detail></order-entry-detail>
+                <b-tabs pills small card>
+                  <b-tab
+                    v-for="product in appDocument.product_codes"
+                    :key="product"
+                    :title="product"
+                  >
+                    <order-entry :product="product"></order-entry>
                   </b-tab>
-
-                  <div v-for="product in appDocument.product_codes" :key="product">
-                    <b-tab :title="product">
-                      <order-entry :product="product"></order-entry>
-                    </b-tab>
-                  </div>
                 </b-tabs>
               </b-card>
-              <!-- <order-work></order-work> -->
             </b-tab>
             <b-tab :title="`ALL: ${appDocument.order_item_count}`">
               <order-work></order-work>
@@ -112,6 +107,17 @@
               </b-col>
             </b-tab>
             <b-tab title="Shipping"></b-tab>
+            <b-tab title="Audit Log">
+              <b-list-group>
+                <div v-for="log in appDocument.order_log" :key="log.seq">
+                  <b-list-group-item href="#" class="flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <small>{{log}}</small>
+                    </div>
+                  </b-list-group-item>
+                </div>
+              </b-list-group>
+            </b-tab>
             <b-tab title="JSON">
               <vue-json-pretty :data="appDocument"></vue-json-pretty>
             </b-tab>

@@ -1,8 +1,8 @@
 <template>
   <b-container fluid>
     <h1>Customer {{pageView}} @ {{ $route.fullPath }}</h1>
-    <app-list-view v-if="pageView === 'list'"></app-list-view>
-    <app-document-view v-else-if="pageView === 'document'"></app-document-view>
+    <list-view v-if="pageView === 'list'"></list-view>
+    <document-view v-else-if="pageView === 'document'"></document-view>
   </b-container>
 </template>
 
@@ -19,12 +19,12 @@ import ListView from "@/components/CustomerList.vue";
 
 export default {
   components: {
-    "app-document-view": DocumentView,
-    "app-list-view": ListView
+    DocumentView,
+    ListView
   },
   data() {
     return {
-      pageView: []
+      pageView: "invalid"
     };
   },
   mounted() {

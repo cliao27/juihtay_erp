@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container fluid v-if="newOrders.length > 0" class="border border-danger rounded bg-warning">
     <b-form @submit="onSubmit" @reset="onReset">
       <b-row>
         <b-input-group v-for="order in newOrders" :key="order._id">
@@ -10,10 +10,10 @@
                 variant="info"
                 :prepend="`${order.product_code} - ${order.product_number} ${order.product_spec} `"
               >
-                  <b-input-group-append>
-      <b-button variant="danger">Del</b-button>
-    </b-input-group-append>
-    </b-input-group>
+                <b-input-group-append>
+                  <b-button variant="danger">Del</b-button>
+                </b-input-group-append>
+              </b-input-group>
             </b-form-group>
           </b-col>
           <b-col>
@@ -64,7 +64,7 @@
               :state="state"
             >
               <b-form-radio-group
-              size="sm"
+                size="sm"
                 :id="`${order._id}-type`"
                 v-model="order.type"
                 :options="options"
@@ -134,5 +134,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+form {
+  padding: 1em 0;
+}
+.container-fluid{
+  margin: 1em 0;
+}
 </style>

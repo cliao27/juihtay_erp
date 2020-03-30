@@ -1,13 +1,7 @@
 <template>
   <div>
     <b-form @input="onChange" @reset="onReset">
-      <b-form-group
-        :label="`${product}-`"
-        label-cols="2"
-        label-align="right"
-        label-for="filterInput"
-        class="mb-0"
-      >
+      <b-form-group :label="`${product}-`" label-cols="2" label-align="right" class="mb-0">
         <b-input-group>
           <b-form-input
             v-model="filter"
@@ -20,7 +14,7 @@
     </b-form>
 
     <div v-if="showList">
-      <div>
+      <!-- <div>
         <b-card-group deck>
           <div v-for="item in selected" :key="item._id">
             <b-card class="text-center" size="sm">
@@ -36,7 +30,7 @@
             </b-card>
           </div>
         </b-card-group>
-      </div>
+      </div>-->
 
       <b-table
         striped
@@ -169,13 +163,11 @@ export default {
       re.test(this.filter);
       if (this.filter.length > 5 || re.test(this.filter)) {
         this.showList = true;
-        if (this.list.length === 0) {
-          moduleApi
-            .list("/product/customer/" + this.product, "")
-            .then(response => {
-              this.list = response.data;
-            });
-        }
+        moduleApi
+          .list("/product/customer/" + this.product, "")
+          .then(response => {
+            this.list = response.data;
+          });
       } else {
         this.showList = false;
       }
